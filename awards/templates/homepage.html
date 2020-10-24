@@ -1,0 +1,17 @@
+{% extends 'base.html %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet" href="{%static 'css/base.css'%}">
+<link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+{{block.super}}
+
+<div class="container text-center">
+    <h1> <span style="font-family: 'Covered By Your Grace', cursive; font-size: 180px; color:black">A</span>wwards </h1>
+
+</div>
