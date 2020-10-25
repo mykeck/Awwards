@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        {% if titles%}
+        {% for title in titles %}
+        <div class="search">
+            <a href="{% url 'project' title.id%}"><img src="{{title.image.url}}" alt="img"></a>
+            <h2><a href="{% url 'project' title.id%}">{{ title.title }}</a></h2>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2> Found 0 matches for the search term {{message}}</h2>
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}
