@@ -22,9 +22,6 @@ def search_results(request):
         return render(request,'search.html',{'message':message}) 
 
 def profile(request):
-    '''
-    Displays a user's profile
-    '''
     current_user = request.user
     profile = Profile.objects.get(user =current_user)
     return render(request, 'profile.html', {"profile" : profile} )           
@@ -33,5 +30,16 @@ def profile(request):
 
 @login_required(login_url="/accounts/login/") 
 def post_project(request):
-    current_user = request.user   
+    current_user = request.user 
+
+    if request.method == "POST":
+        form = PostProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.profile = request.user
+            project.save()
+        return redirect('homepage')
+    else:
+        form = PostProjectForm()
+    return render(request, 'post_project.html', {"form": form})  
 

@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="container">
+    <div class="profile">
+        <img src="{{profile.profile_pic.url}}" width="300px">
+        <h2>{{profile.user}}</h2>
+        <h3>{{profile.contact}}</h3>
+      
+        <a class="nav-link" href="{% url 'post_project' %}"><button type="button" class="btn btn-success">Post
+                project</button></a>
+        <a class="nav-link" href="{% url 'update_profile' %}"><button type="button" class="btn btn-success">Update
+                Profile</button></a>
+
+
+        {% if profile.bio %}
+        <h3>Bio: {{profile.bio}}</h3>
+        <hr>
+        <hr>
+        {% endif %}
+
+  
+    </div>
+</div>
+{% endblock%}
