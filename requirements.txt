@@ -1,7 +1,10 @@
 asgiref==3.2.10
 beautifulsoup4==4.9.3
-Django==3.1.2
+confusable-homoglyphs==3.2.0
+Django==1.11.29
 django-bootstrap4==2.3.1
+django-registration==2.4.1
+psycopg2-binary==2.8.6
 pytz==2020.1
 soupsieve==2.0.1
 sqlparse==0.4.1
