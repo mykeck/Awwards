@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import Project
+from .models import Project,Profile
 from django.contrib.auth.decorators import login_required
+from .forms import EditProfileForm, PostProjectForm, RateProjectForm
 
 # Create your views here.
 
@@ -18,7 +19,15 @@ def search_results(request):
 
     else:
         message = "you haven't searched for any term"
-        return render(request,'search.html',{'message':message})    
+        return render(request,'search.html',{'message':message}) 
+
+def profile(request):
+    '''
+    Displays a user's profile
+    '''
+    current_user = request.user
+    profile = Profile.objects.get(user =current_user)
+    return render(request, 'profile.html', {"profile" : profile} )           
 
 
 
