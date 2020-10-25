@@ -21,6 +21,8 @@ from django.contrib.auth import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
+    url(r'^$',include('project.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^logout/$', views.logout, {"next_page": '/accounts/login/'}),
+    url(r'^accounts/register/',RegistrationView.as_view(success_url='/'),name='registration_register'),
 ]
