@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your models here.
@@ -13,6 +14,7 @@ class Project(models.Model):
     link = models.CharField(max_length=80)
     pub_date = models.DateField(auto_now_add=True)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.title
@@ -93,5 +95,11 @@ class Profile(models.Model):
     
     @receiver(post_save,sender=User)
     def save_profile(sender,instance, **kwargs):
-        instance.profile.save()
+        try:
+
+            instance.profiles.save()
+            
+        except ObjectDoesNotExist:
+
+            Profiles.objects.create(user=instance)
 

@@ -25,7 +25,6 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'',include('awards.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    # url(r'^logout/$', views.logout, {"next_page": '/accounts/login/'}),
     url(r'^logout/',views.LogoutView.as_view(),{'next_page':'/'}),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     

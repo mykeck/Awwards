@@ -42,5 +42,32 @@ def post_project(request):
         return redirect('homepage')
     else:
         form = PostProjectForm()
-    return render(request, 'post_project.html', {"form": form})  
+    return render(request, 'post_project.html', {"form": form}) 
+
+
+def update_profile(request):
+    current_user = request.user
+
+    if request.method == "POST":
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile_pic = form.cleaned_data['profile_pic']
+            bio  = form.cleaned_data['bio']
+            contact = form.cleaned_data['contact']
+
+            updated_profile = Profile.objects.get(user= current_user)
+            updated_profile.profile_pic = profile_pic
+            updated_profile.bio = bio
+            updated_profile.save()
+        return redirect('profile')
+    else:
+        form = EditProfileForm()
+    return render(request, 'update_profile.html', {"form": form})  
+
+
+def view_project(request,id):
+    project = Project.objects.get(id=id)
+    # ratings = Rating.objects.filter(project=project)
+    
+    return render(request, 'project.html', {'project': project, "ratings": ratings})       
 

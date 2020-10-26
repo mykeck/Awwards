@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+            <div class="project">
+                <img src="{{project.image.url}}" alt="img">
+                <div class="list-group-item">
+                    <p style="font-size:60px;"><b>{{project.title}}</b></p>
+                    <p style="font-size:30px;"><b>Live link:</b> &nbsp; <a href="{{project.link}}"
+                            target="_blank">{{project.link}}</a> </p>
+                    <p style="font-size:30px;">{{project.description}}<p>
+                    <p  style="font-size:20px;">Posted {{project.pub_date|timesince}} ago</p>
+                    <b style="font-size:20px;">By {{project.profile.username}}</b>
+                    <hr>
+                    <hr>
+                    <a href="{% url 'rate_project' project.id %}">
+                        <button type="button" class="btn btn-success">Rate Project</button>
+                     </a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"style="text-align: center; margin-left:250px">
+            {% if ratings%}
+            {% for rate in ratings %}
+            <div class="card">
+            <h2> {{rate.user}}:</h2> 
+            <h2>AVG {{rate.average | floatformat:2 }}</h2>
+            <h2> design: {{rate.design}} ||content: {{rate.content}}|| usability: {{rate.usability}}</h2>
+            <h2> </h2>
+            <h2> </h2>
+           
+            </div>
+            {% endfor %}
+            {% else %}
+                    <p>No ratings available</p>
+                {% endif %}
+
+        </div>
+        <div class="col-md-8">
+        </div>
+    </div>
+
+    {% endblock %}
