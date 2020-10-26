@@ -67,7 +67,30 @@ def update_profile(request):
 
 def view_project(request,id):
     project = Project.objects.get(id=id)
-    # ratings = Rating.objects.filter(project=project)
+    ratings = Rating.objects.filter(project=project)
     
-    return render(request, 'project.html', {'project': project, "ratings": ratings})       
+    return render(request, 'project.html', {'project': project, "ratings": ratings})  
+
+
+@login_required(login_url="/accounts/login/")
+def rate_project(request,id):
+    project = Project.objects.get(pk = id)
+    current_user = request.user
+    if request.method == "POST":
+        form = RateProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            content = form.cleaned_data['content']
+            rate  = Rating(design=design, usability=usability, content=content,project=project, user=current_user)
+            rate.save()
+            avg = rate.average()
+            rate.average = avg
+            rate.save()
+
+            return redirect(view_project, id=project.id)
+    else:
+        form = RateProjectForm()
+
+    return render(request, 'rating.html', {"form": form, 'project': project})         
 

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -54,7 +55,7 @@ class Project(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE,default="")
+    user = models.OneToOneField(User,on_delete=models.CASCADE,null=True)
     bio  =  models.CharField(max_length=100) 
     contact =  models.CharField(max_length=100)
     # profile_pic = CloudinaryField('image')
@@ -97,9 +98,11 @@ class Profile(models.Model):
     def save_profile(sender,instance, **kwargs):
         try:
 
-            instance.profiles.save()
+            instance.profile.save()
             
         except ObjectDoesNotExist:
 
-            Profiles.objects.create(user=instance)
+            Profile.objects.create(user=instance)
+
+            
 
