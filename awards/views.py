@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import Project,Profile
 from django.contrib.auth.decorators import login_required
-from .forms import EditProfileForm, PostProjectForm, RateProjectForm
+from .forms import EditProfileForm, PostProjectForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -15,7 +16,7 @@ def search_results(request):
         searched_term = request.GET.get('title')
         titles = project.objects.filter(title_icontains= searched_term)
         message = f"{searched_term}"
-        return render(request,'search.html',{'message':message,'titles',titles})
+        return render(request,'search.html',{'message':message,'titles':titles})
 
     else:
         message = "you haven't searched for any term"

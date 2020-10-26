@@ -12,7 +12,7 @@ class PostProjectForm(ModelForm):
         model = Project
         exclude = ['profile']
 
-class RateProjectForm(ModelForm):
-    class Meta:
-        model = Rating
-        exclude = ['user', 'project']
+# class RateProjectForm(ModelForm):
+#     class Meta:
+#         model = Rating
+#         exclude = ['user', 'project']

@@ -1,5 +1,7 @@
 {% load bootstrap4 %}
 {% load static %}
+
+<!DOCTYPE html>
 <html>
 <head>
 {% block styles %}
@@ -14,12 +16,12 @@
     {% include 'navbar.html' %}
 
     {% block content %}
-    {%endblock%}
+    {% endblock %}
 
     {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/d4c7a63894.js" crossorigin="anonymous"></script>
-    {% boostrap_javascript %}
+    {% bootstrap_javascript %}
     {% endblock %}
 </body>
 </html>
