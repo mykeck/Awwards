@@ -55,7 +55,7 @@ class Project(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,default="")
     bio  =  models.CharField(max_length=100) 
     contact =  models.CharField(max_length=100)
     # profile_pic = CloudinaryField('image')
@@ -104,5 +104,28 @@ class Profile(models.Model):
 
             Profile.objects.create(user=instance)
 
-            
+
+class Rating(models.Model):
+    design = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], null=True)
+    usability =models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], null=True)
+    content = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], null=True)
+    average = models.PositiveIntegerField(null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.design
+
+    def save_rating(self):
+        self.save()
+
+    def delete_rating(self):
+        self.delete()
+
+    
+    def average(self):
+        avg = (self.design+ self.usability+ self.content)/3
+        return avg
+
 

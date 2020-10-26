@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Profile,Project
+from .models import Profile,Project,Rating
 
 class EditProfileForm(ModelForm):
     class Meta:
@@ -12,7 +12,7 @@ class PostProjectForm(ModelForm):
         model = Project
         exclude = ['profile']
 
-# class RateProjectForm(ModelForm):
-#     class Meta:
-#         model = Rating
-#         exclude = ['user', 'project']
+class RateProjectForm(ModelForm):
+    class Meta:
+        model = Rating
+        exclude = ['user', 'project']
