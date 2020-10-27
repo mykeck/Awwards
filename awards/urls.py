@@ -13,6 +13,8 @@ urlpatterns=[
     url(r'^post_project/',views.post_project, name = "post_project"),
     url(r'^project/(?P<project_id>\d+)', views.view_project,name="project" ),
     url(r'^rating/(?P<project_id>\d+)', views.rating,name="rating" ),
+    url(r'^api/profiles/', views.ProfileView.as_view()),
+    url(r'^api/projects/', views.ProjectView.as_view()),
 
     
 ]
