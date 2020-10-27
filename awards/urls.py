@@ -11,10 +11,10 @@ urlpatterns=[
     url(r'^profile/',views.profile, name = "profile"),
     url(r'^update_profile/',views.update_profile, name = "update_profile"),
     url(r'^post_project/',views.post_project, name = "post_project"),
-    url(r'^project/<int:id>', views.view_project,name="project" ),
+    url(r'^project/(?P<project_id>\d+)', views.view_project,name="project" ),
+    url(r'^rating/(?P<project_id>\d+)', views.rating,name="rating" ),
 
     
-
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

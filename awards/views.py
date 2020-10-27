@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 from .models import Project, Profile, Rating
 from django.contrib.auth.decorators import login_required
-from .forms import EditProfileForm, PostProjectForm
+from .forms import EditProfileForm, PostProjectForm, RateProjectForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -65,16 +65,16 @@ def update_profile(request):
     return render(request, 'update_profile.html', {"form": form})  
 
 
-def view_project(request,id):
-    project = Project.objects.get(id=id)
+def view_project(request,project_id):
+    project = Project.objects.get(id=project_id)
     ratings = Rating.objects.filter(project=project)
     
-    return render(request, 'project.html', {'project': project, "ratings": ratings})  
+    return render(request, 'project.html', {'project': project ,'ratings':ratings} )  
 
 
 @login_required(login_url="/accounts/login/")
-def rate_project(request,id):
-    project = Project.objects.get(pk = id)
+def rating(request,project_id):
+    project = Project.objects.get(id = project_id)
     current_user = request.user
     if request.method == "POST":
         form = RateProjectForm(request.POST, request.FILES)
@@ -88,7 +88,7 @@ def rate_project(request,id):
             rate.average = avg
             rate.save()
 
-            return redirect(view_project, id=project.id)
+        return render(request,'project.html',locals())
     else:
         form = RateProjectForm()
 

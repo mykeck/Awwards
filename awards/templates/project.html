@@ -20,7 +20,7 @@
                     <b style="font-size:20px;">By {{project.profile.username}}</b>
                     <hr>
                     <hr>
-                    <a href="{% url 'rate_project' project.id %}">
+                    <a href="{% url 'rating' project_id=project.id %}">
                         <button type="button" class="btn btn-success">Rate Project</button>
                      </a>
 
@@ -33,7 +33,10 @@
     </div>
     <div class="row">
         <div class="col-md-6"style="text-align: center; margin-left:250px">
+            <p> {{rating.design}}</p>
+           
             {% if ratings%}
+
             {% for rate in ratings %}
             <div class="card">
             <h2> {{rate.user}}:</h2> 

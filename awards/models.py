@@ -115,8 +115,8 @@ class Rating(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
-    def __str__(self):
-        return self.design
+    # def __str__(self):
+    #     return self.project
 
     def save_rating(self):
         self.save()
