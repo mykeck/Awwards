@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -34,6 +38,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'bootstrap4',
+    'cloudinary',
     'registration',
     'awards',
     'django.contrib.admin',
@@ -134,3 +139,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
+
+cloudinary.config( 
+  cloud_name = "dbhe0lknh", 
+  api_key = "843881231652611", 
+  api_secret = "J9PRsc2CJ-02Y3Exg9Mja8Kc8DA" 
+)

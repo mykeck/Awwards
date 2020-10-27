@@ -4,13 +4,14 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.validators import MinValueValidator, MaxValueValidator
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
 
 class Project(models.Model):
     title = models.CharField(max_length=50)
-    # image = CloudinaryField('image')
+    image = CloudinaryField('image',blank=True)
     description = models.CharField(max_length=150)
     link = models.CharField(max_length=80)
     pub_date = models.DateField(auto_now_add=True)
@@ -58,7 +59,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,default="")
     bio  =  models.CharField(max_length=100) 
     contact =  models.CharField(max_length=100)
-    # profile_pic = CloudinaryField('image')
+    profile_pic = CloudinaryField('image',blank=True)
 
 
     def __str__(self):
