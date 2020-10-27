@@ -1,7 +1,7 @@
 # Award
 
 ## Author
-https://github.com/brenda-wanjiku/projectIP
+//
 
 ## Description
 An application that allows a user to post a project and be reviewed by other users.
@@ -64,7 +64,7 @@ The user will require git, django, postgres and python3.8 installed in their mac
 
 
 ## Live Site
-* Can be accessed here https://brenda-project.herokuapp.com/
+* Can be accessed here /-/
 
 * To log in as an admin you can use the following credentials:
       username : brendawanjiku29 and password: brenda29
